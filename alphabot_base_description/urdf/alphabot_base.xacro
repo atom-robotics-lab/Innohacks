@@ -4,7 +4,7 @@
 <xacro:include filename="$(find alphabot_base_description)/urdf/materials.xacro" />
 <xacro:include filename="$(find alphabot_base_description)/urdf/alphabot_base.trans" />
 <xacro:include filename="$(find alphabot_base_description)/urdf/alphabot_base.gazebo" />
-<xacro:include filename="$(find mr_robot_description)/gazebo/mr_robot_plugins.gazebo" />
+<!-- <xacro:include filename="$(find alphabot_base_description)/gazebo/alphabot_base_plugins.gazebo" /> -->
 
 <link name="base_link">
   <inertial>
