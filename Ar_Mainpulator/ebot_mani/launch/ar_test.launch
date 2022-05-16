@@ -1,0 +1,33 @@
+<!-- Launch file for starting ROS-TCP endpoint along with a simulated environment. This launch file auto-configures the ROS IP -->
+<launch>
+	<node pkg="ebot_mani" type="ip.sh" name="ip_config" output="screen"/>
+<!--   ebot -->
+	<param name="robot_description" command="$(find xacro)/xacro --inorder '$(find ebot_mani)/urdf/ur_robotiq.urdf.xacro'"/>
+   
+
+
+<!--   ur5 world -->
+	<include file="$(find ebot_mani)/launch/empty_world.launch" />
+
+	<arg name="x" default="0"/>
+	<arg name="y" default="0"/>
+	<arg name="z" default="0.1"/>
+	<arg name="r" default="0"/>
+	<arg name="p" default="0"/>
+	<arg name="ya" default="0"/>		
+
+<!-- Spawn the ur5 robot model -->
+	<node name="mybot_spawn" pkg="gazebo_ros" type="spawn_model" output="screen" 
+		args="-urdf -param robot_description -model ebot -x $(arg x) -y $(arg y) -z $(arg z) -R $(arg r) -P $(arg p) -Y $(arg ya)" />
+
+
+		
+<!-- include the moveit launch file and node for pick and place -->
+<include file="$(find ebot_mani)/launch/ur5_bringup_moveit.launch" />
+<!-- <node name="get_ip" pkg="ebot_mani" type="ip.sh"  output="screen"/> -->
+<node name="server_endpoint" pkg="ebot_mani" type="server.sh" output="screen" respawn="true" />
+<!-- <include file="$(find ebot_mani)/launch/server_connect.launch" /> -->
+<!-- </include> -->
+  
+  
+</launch>

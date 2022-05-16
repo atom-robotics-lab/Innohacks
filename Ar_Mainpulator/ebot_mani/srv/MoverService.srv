@@ -1,0 +1,4 @@
+UR5MoveitJoints joints_input
+bot pick_pose
+---
+moveit_msgs/RobotTrajectory[] trajectories
